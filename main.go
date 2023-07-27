@@ -11,7 +11,7 @@ import (
 
 func main() {
 	dirFlag := flag.String("dir", "", "Directory to serve from. Default: CWD")
-	httpPort := flag.Int("port", 8081, "Port to serve on. Default: 8081")
+	listenAddr := flag.String("addr", "localhost:8080", "IP adress and port to listen on. Default: localhost:8080")
 	prefixUrl := flag.String("prefix", "", "URL to strip from resource paths. None by default")
 	rootUrl := flag.String("url", "/", "Root url to handle. Default: /")
 	flag.Parse()
@@ -32,7 +32,7 @@ func main() {
 	}
 	http.Handle(*rootUrl, srv)
 
-	if err := http.ListenAndServe(fmt.Sprintf(":%d", *httpPort), nil); err != nil {
+	if err := http.ListenAndServe(fmt.Sprintf("%s", *listenAddr), nil); err != nil {
 		log.Fatalf("Error with WebDAV server: %v", err)
 	}
 }
