@@ -6,8 +6,8 @@ Run with argument `-h` or `--help`:
 ```
   -dir string
         Directory to serve from. Default: CWD
-  -port int
-        Port to serve on. Default: 80 (default 80)
+  -addr string
+        IP adress and port to serve on. Default: 127.0.0.1:8080
   -prefix string
         URL to strip from resource paths. None by default
   -url string
@@ -27,7 +27,7 @@ client_max_body_size 0;
 location / {
     if ($request_method != GET) {
         # pass webdav handling
-        proxy_pass http://webdav:8080;
+        proxy_pass http://127.0.0.1:8080;
     }
     # handle GET requests directly
 }
